@@ -137,10 +137,22 @@ namespace Tic_Tac_Toe
             //Vertical Check
             for (int i = 0; i < _board.GetLength(0); i++)
             {
-                for (int j = 0; j < _board.GetLength(0); i++)
+                for (int j = 0; j < _board.GetLength(1); j++)
                 {
-                    
+                    if (_board[j, i] == token)
+                    {
+                        count++;
+                    }
+                    else
+                        break;
                 }
+
+                if (count == _board.GetLength(0) && count == _board.GetLength(1))
+                {
+                    return true;
+                }
+
+                count = 0;
             }
 
             //Horizontal Check
@@ -151,26 +163,62 @@ namespace Tic_Tac_Toe
                     if (_board[i, j] == token)
                     {
                         count++;
-                        if (count == _board.GetLength(0) && count == _board.GetLength(1))
-                        {
-                            return true;
-                        }
                     }
                     else
                     {
-                        count = 0;
                         break;
                     }
+
                 }
+
+                if (count == _board.GetLength(0) && count == _board.GetLength(1))
+                {
+                    return true;
+                }
+
+                count = 0;
             }
 
             //Diagonal Check
             for (int i = 0; i < _board.GetLength(0); i++)
             {
-                for (int j = _board.GetLength(1); j > 0; j--)
-                { 
+                if (_board[i, i] == token)
+                {
+                    count++;
+                }
+                else
+                {
+                    break;
+                }
+
+                if (count == _board.GetLength(0) && count == _board.GetLength(1))
+                {
+                    return true;
                 }
             }
+            count = 0;
+
+            //Diagonal Check 2
+            int h = 2;
+            for (int i = 0; i < _board.GetLength(0); i++)
+            {
+                if (_board[i, h] == token)
+                {
+                    count++;
+                }
+                else
+                {
+                    break;
+                }
+
+                if (count == _board.GetLength(0) && count == _board.GetLength(1))
+                {
+                    return true;
+                }
+
+                h--;
+            }
+
             //Return TokenWon
             return false;
         }

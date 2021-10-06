@@ -92,11 +92,5 @@ namespace Tic_Tac_Toe
         {
             _gameOver = true;
         }
-
-        private void DisplayMainMenu()
-        {
-            Console.WriteLine("TIC-TAC-TOE: The Game");
-            int playgame = 
-        }
     }
 }
