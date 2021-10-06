@@ -4,10 +4,17 @@ using System.Text;
 
 namespace Tic_Tac_Toe
 {
+    enum Scene
+    {
+        MAINMENU,
+        PLAYTICTAK,
+        REPLAYMENU
+    }
     class Game
     {
         private bool _gameOver;
         private Board _gameBoard;
+        private static Scene _currentScene;
 
         public void Run()
         {
@@ -57,12 +64,8 @@ namespace Tic_Tac_Toe
             int outputInt = -1;
             while (outputInt == -1)
             {
-                Console.WriteLine();
-                if (int.TryParse(Console.ReadLine(), out outputInt))
-                {
-                    //check if Coordinate is too big
-                }
-                else
+                Console.WriteLine(desc);
+                if (!int.TryParse(Console.ReadLine(), out outputInt))
                 {
                     Console.WriteLine("Invalid Coordinate");
                     outputInt = -1;
@@ -70,6 +73,19 @@ namespace Tic_Tac_Toe
             }
 
             return outputInt;
+        }
+
+        private static void DisplayCurrentScene()
+        {
+            switch (_currentScene)
+            {
+                case Scene.MAINMENU:
+                    break;
+                case Scene.PLAYTICTAK:
+                    break;
+                case Scene.REPLAYMENU:
+                    break;
+            }
         }
     }
 }
