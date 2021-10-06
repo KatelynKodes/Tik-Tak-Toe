@@ -39,7 +39,12 @@ namespace Tic_Tac_Toe
         /// </summary>
         public void Update()
         {
-            if (checkWinner(_player1Token))
+            if (CheckDraw(_player1Token, _player2Token))
+            {
+                Console.WriteLine("Game Board is full, DRAW.");
+                Console.ReadKey(true);
+            }
+            else if (checkWinner(_player1Token))
             {
                 Console.WriteLine("PLAYER 1 WON!");
                 Console.ReadKey(true);
@@ -47,11 +52,6 @@ namespace Tic_Tac_Toe
             else if (checkWinner(_player2Token))
             {
                 Console.WriteLine("PLAYER 2 WON!");
-                Console.ReadKey(true);
-            }
-            else if (CheckDraw(_player1Token, _player2Token))
-            {
-                Console.WriteLine("Game Board is full, DRAW.");
                 Console.ReadKey(true);
             }
 
@@ -64,7 +64,7 @@ namespace Tic_Tac_Toe
                     while (!_SecondCoordinateChosen)
                     {
                         _cor2 = Game.GetInput("Input your second coordinate");
-                        if (_cor2 < _board.GetLongLength(0))
+                        if (_cor2 < _board.GetLongLength(1))
                         {
                             _SecondCoordinateChosen = true;
                             _BothCoordinatesChosen = true;
@@ -134,77 +134,45 @@ namespace Tic_Tac_Toe
         private bool checkWinner(char token)
         {
             int count = 0;
-            bool tokenwon = false;
-
-            // First it checks for diagnol or vertical matches
-            for (int i = 0; i < _board.GetLongLength(0); i++)
+            //Vertical Check
+            for (int i = 0; i < _board.GetLength(0); i++)
             {
-                for (int j = 0; j < _board.GetLongLength(1); j++)
+                for (int j = 0; j < _board.GetLength(0); i++)
+                {
+                    
+                }
+            }
+
+            //Horizontal Check
+            for (int i = 0; i < _board.GetLength(0); i++)
+            {
+                for (int j = 0; j < _board.GetLength(1); j++)
                 {
                     if (_board[i, j] == token)
                     {
-                        if (i != 0)
+                        count++;
+                        if (count == _board.GetLength(0) && count == _board.GetLength(1))
                         {
-                            if (j != 0)
-                            {
-                                if (_board[(i - 1), (j - 1)] == token)
-                                {
-                                    count++;
-                                }
-                            }
-                            else
-                            {
-                                if (_board[(i - 1), j] == token)
-                                {
-                                    count++;
-                                }
-                            }
+                            return true;
                         }
                     }
-                }
-            }
-
-            //If count is equal to the length of the first and second dimension
-            // TokenWon is set to true
-            if (count == _board.GetLongLength(0) || count == _board.GetLongLength(1))
-            {
-                tokenwon = true;
-            }
-            else
-            {
-                //If its not, start checking for horizontal matches
-                count = 0;
-                for (int i = 0; i < _board.GetLongLength(0); i++)
-                {
-                    for (int j = 0; j < _board.GetLongLength(1); j++)
+                    else
                     {
-                        if (_board[i, j] == token)
-                        {
-                            if (j != 0)
-                            {
-                                if (_board[i, (j - 1)] == token)
-                                {
-                                    count++;
-                                }
-                            }
-                            else
-                            {
-                                count++;
-                            }
-                        }
+                        count = 0;
+                        break;
                     }
-                }
-
-                //If count is equal to the length of the first and second dimension
-                // TokenWon is set to true
-                if (count == _board.GetLongLength(0) || count == _board.GetLongLength(1))
-                {
-                    tokenwon = true;
                 }
             }
 
+            //Diagonal Check
+            for (int i = 0; i < _board.GetLength(0); i++)
+            {
+                for (int j = _board.GetLength(1); j > 0; j--)
+                { 
+                }
+            }
             //Return TokenWon
-            return tokenwon;
+            return false;
         }
 
         /// <summary>

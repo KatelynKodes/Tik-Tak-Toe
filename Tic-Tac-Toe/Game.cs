@@ -12,7 +12,7 @@ namespace Tic_Tac_Toe
     }
     class Game
     {
-        private bool _gameOver;
+        private static bool _gameOver;
         private Board _gameBoard;
         private static Scene _currentScene;
 
@@ -86,6 +86,17 @@ namespace Tic_Tac_Toe
                 case Scene.REPLAYMENU:
                     break;
             }
+        }
+
+        private static void EndGame()
+        {
+            _gameOver = true;
+        }
+
+        private void DisplayMainMenu()
+        {
+            Console.WriteLine("TIC-TAC-TOE: The Game");
+            int playgame = 
         }
     }
 }
